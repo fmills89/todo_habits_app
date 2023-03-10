@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+const style = {
+  bg: `h-screen w-screen p-4`,
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={style.bg}>
+      <div className="container">
+        <h3>Action Items</h3>
+        <h2>Habits</h2>
+        <form className="form">
+          <input type="text" placeholder="Add Habit"></input>
+          <button className="button"></button>
+        </form>
+      </div>
     </div>
   );
 }
