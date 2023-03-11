@@ -4,6 +4,8 @@ import Todo from "./components/Todo";
 
 const style = {
   bg: `h-screen w-screen p-4`,
+  container: `bg-slate-100 max-w-[500px] w-full m-auto rounded-md shadow-xl, p-4`,
+  heading: `text-3xl font-bold, text-center text-gray-800 p-2`,
 };
 
 function App() {
@@ -11,9 +13,8 @@ function App() {
 
   return (
     <div className={style.bg}>
-      <div className="container">
-        <h3>Action Items</h3>
-        <h2>Habits</h2>
+      <div className={style.container}>
+        <h3 className={style.heading}>Action Items</h3>
         <form className="form">
           <input type="text" placeholder="Add Habit"></input>
           <button className="button">
@@ -25,6 +26,7 @@ function App() {
             <Todo key={index} todo={todo} />
           ))}
         </ul>
+        <p className={style.count}>You have two todos.</p>
       </div>
     </div>
   );
