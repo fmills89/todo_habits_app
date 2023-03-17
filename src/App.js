@@ -40,7 +40,7 @@ function App() {
   };
 
   const deleteTodo = async (id) => {
-    console.log(id);
+    // console.log(id);
     // error handling
     if (id === undefined) {
       return alert("Id has not been found!");
