@@ -6,6 +6,7 @@ import {
   onSnapshot,
   updateDoc,
   doc,
+  addDoc,
 } from "firebase/firestore";
 import { IoMdAddCircle } from "react-icons/io";
 import Todo from "./components/Todo";
@@ -23,10 +24,18 @@ const style = {
 function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
-  console.log(input);
 
   const createTodo = async (e) => {
     e.preventDefault(e);
+    if (input === "") {
+      return alert("Please enter a valid To-do!");
+    }
+    // this will create a db is not already there
+    await addDoc(collection(db, "todos"), {
+      text: input,
+      completed: false,
+    });
+    setInput("");
   };
 
   useEffect(() => {
@@ -71,7 +80,9 @@ function App() {
             <Todo key={index} todo={todo} toggleComplete={toggleComplete} />
           ))}
         </ul>
-        <p className={style.count}>You have two todos.</p>
+        {todos.length < 1 ? null : (
+          <p className={style.count}>You have {todos.length} todos.</p>
+        )}
       </div>
     </div>
   );
