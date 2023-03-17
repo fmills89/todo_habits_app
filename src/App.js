@@ -22,6 +22,12 @@ const style = {
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState("");
+  console.log(input);
+
+  const createTodo = async (e) => {
+    e.preventDefault(e);
+  };
 
   useEffect(() => {
     // defining a path for our database
@@ -37,6 +43,7 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  // toggling boolean of completed value
   const toggleComplete = async (todo) => {
     await updateDoc(doc(db, "todos", todo.id), {
       completed: !todo.completed,
@@ -47,11 +54,13 @@ function App() {
     <div className={style.bg}>
       <div className={style.container}>
         <h3 className={style.heading}>Action Items</h3>
-        <form className={style.form}>
+        <form onSubmit={createTodo} className={style.form}>
           <input
             className={style.input}
             type="text"
             placeholder="Add Habit"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
           ></input>
           <button className={style.button}>
             <IoMdAddCircle size={30} />
