@@ -10,7 +10,7 @@ const style = {
   button: `cursor-pointer flex items-center`,
 };
 
-function Todo({ todo, toggleComplete }) {
+function Todo({ todo, toggleComplete, deleteTodo }) {
   return (
     <li className={todo.completed ? style.liComplete : style.li}>
       <div className={style.row}>
@@ -26,7 +26,8 @@ function Todo({ todo, toggleComplete }) {
           {todo.text}
         </p>
       </div>
-      <button>{<FaRegTrashAlt />}</button>
+      {/* todo.id is autogenereated */}
+      <button onClick={() => deleteTodo(todo.id)}>{<FaRegTrashAlt />}</button>
     </li>
   );
 }

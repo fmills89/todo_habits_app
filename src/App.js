@@ -7,6 +7,7 @@ import {
   updateDoc,
   doc,
   addDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { IoMdAddCircle } from "react-icons/io";
 import Todo from "./components/Todo";
@@ -36,6 +37,15 @@ function App() {
       completed: false,
     });
     setInput("");
+  };
+
+  const deleteTodo = async (id) => {
+    console.log(id);
+    // error handling
+    if (id === undefined) {
+      return alert("Id has not been found!");
+    }
+    await deleteDoc(doc(db, "todos", id));
   };
 
   useEffect(() => {
@@ -77,7 +87,12 @@ function App() {
         </form>
         <ul>
           {todos.map((todo, index) => (
-            <Todo key={index} todo={todo} toggleComplete={toggleComplete} />
+            <Todo
+              key={index}
+              todo={todo}
+              deleteTodo={deleteTodo}
+              toggleComplete={toggleComplete}
+            />
           ))}
         </ul>
         {todos.length < 1 ? null : (
