@@ -1,4 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { db } from "./firebase";
+import {
+  query,
+  collection,
+  onSnapshot,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 import { IoMdAddCircle } from "react-icons/io";
 import Todo from "./components/Todo";
 
@@ -13,7 +21,27 @@ const style = {
 };
 
 function App() {
-  const [todos, setTodos] = useState(["Learn React", "Work on Algos"]);
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    // defining a path for our database
+    const q = query(collection(db, "todos"));
+    // using onSnapShot reads the database
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let todosArr = [];
+      querySnapshot.forEach((doc) => {
+        todosArr.push({ ...doc.data(), id: doc.id });
+      });
+      setTodos(todosArr);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const toggleComplete = async (todo) => {
+    await updateDoc(doc(db, "todos", todo.id), {
+      completed: !todo.completed,
+    });
+  };
 
   return (
     <div className={style.bg}>
@@ -31,7 +59,7 @@ function App() {
         </form>
         <ul>
           {todos.map((todo, index) => (
-            <Todo key={index} todo={todo} />
+            <Todo key={index} todo={todo} toggleComplete={toggleComplete} />
           ))}
         </ul>
         <p className={style.count}>You have two todos.</p>
