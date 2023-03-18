@@ -11,14 +11,15 @@ import {
 } from "firebase/firestore";
 import { IoMdAddCircle } from "react-icons/io";
 import Todo from "./components/Todo";
+import Button from "./components/UI/Button";
 
 const style = {
   bg: `h-screen w-screen p-4`,
-  container: `bg-slate-100 max-w-[500px] w-full m-auto rounded-md shadow-xl, p-4`,
+  container: `bg-slate-100 max-w-[500px] w-full m-auto rounded-md shadow-xl p-6 border border-red-200`,
+  habitContainer: `p-4`,
   heading: `text-3xl font-bold, text-center text-gray-800 p-2`,
   form: `flex justify-between`,
-  input: `border p-2 w-full text-3xl`,
-  button: `border p-4 ml-2 bg-purple-500 text-slate-100`,
+  input: `border p-2 w-full text-xl`,
   count: `text-center p-2`,
 };
 
@@ -72,18 +73,16 @@ function App() {
   return (
     <div className={style.bg}>
       <div className={style.container}>
-        <h3 className={style.heading}>Action Items</h3>
+        <h3 className={style.heading}>Action Items - Todos</h3>
         <form onSubmit={createTodo} className={style.form}>
           <input
             className={style.input}
             type="text"
-            placeholder="Add Habit"
+            placeholder="Add Priority Todos"
             value={input}
             onChange={(e) => setInput(e.target.value)}
           ></input>
-          <button className={style.button}>
-            <IoMdAddCircle size={30} />
-          </button>
+          <Button />
         </form>
         <ul>
           {todos.map((todo, index) => (
@@ -98,6 +97,19 @@ function App() {
         {todos.length < 1 ? null : (
           <p className={style.count}>You have {todos.length} todos.</p>
         )}
+      </div>
+      <div className={style.habitContainer}>
+        <div className={style.container}>
+          <h3 className={style.heading}>Action Items - Habits</h3>
+          <form className={style.form}>
+            <input
+              className={style.input}
+              type="text"
+              placeholder="Add Habit"
+            ></input>
+            <Button />
+          </form>
+        </div>
       </div>
     </div>
   );
