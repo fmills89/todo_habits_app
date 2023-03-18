@@ -12,6 +12,7 @@ import {
 import { IoMdAddCircle } from "react-icons/io";
 import Todo from "./components/Todo";
 import Button from "./components/UI/Button";
+import Habits from "./components/Habits";
 
 const style = {
   bg: `h-screen w-screen p-4`,
@@ -25,6 +26,10 @@ const style = {
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [habits, setHabits] = useState([
+    "Duolingo once a day",
+    "Work on project based learning",
+  ]);
   const [input, setInput] = useState("");
 
   const createTodo = async (e) => {
@@ -109,6 +114,11 @@ function App() {
             ></input>
             <Button />
           </form>
+          <ul>
+            {habits.map((habit, index) => (
+              <Habits key={index} habit={habit} />
+            ))}
+          </ul>
         </div>
       </div>
     </div>
