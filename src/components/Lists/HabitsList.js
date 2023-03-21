@@ -1,5 +1,5 @@
 import React from "react";
-import { style } from "../styling/Style";
+import { style } from "../../Style/Style";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 function Habits({ habit, toggleComplete, deleteHabit }) {

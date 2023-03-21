@@ -35,7 +35,7 @@ function TodoForm() {
     if (id === undefined) {
       return alert("Id has not been found!");
     }
-    await deleteDoc(doc("todos", id));
+    await deleteDoc(doc(db, "todos", id));
   };
 
   useEffect(() => {
