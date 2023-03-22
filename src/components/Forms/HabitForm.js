@@ -7,6 +7,7 @@ import {
   query,
   getDocs,
   onSnapshot,
+  deleteDoc,
 } from "firebase/firestore";
 
 import HabitsList from "../Lists/HabitsList";
@@ -17,7 +18,6 @@ function HabitForm() {
   const [habits, setHabits] = useState([]);
   // useState input
   const [input, setInput] = useState("");
-  console.log(input);
 
   const createHabit = async (e) => {
     e.preventDefault(e);
@@ -30,6 +30,14 @@ function HabitForm() {
         completed: false,
       });
       setInput("");
+    }
+  };
+
+  const deleteHabit = async (id) => {
+    if (id === undefined) {
+      return alert("Habit ID cannot be found!");
+    } else {
+      await deleteDoc(doc(db, "habits", id));
     }
   };
 
@@ -61,7 +69,7 @@ function HabitForm() {
         </form>
         <ul>
           {habits.map((habit, index) => (
-            <HabitsList key={index} habit={habit} />
+            <HabitsList key={index} habit={habit} deleteHabit={deleteHabit} />
           ))}
         </ul>
       </div>

@@ -9,7 +9,7 @@ function Habits({ habit, toggleComplete, deleteHabit }) {
         <input type="checkbox" />
         <p className={style.text}>{habit.text}</p>
       </div>
-      <button>{<FaRegTrashAlt />}</button>
+      <button onClick={() => deleteHabit(habit.id)}>{<FaRegTrashAlt />}</button>
     </li>
   );
 }
