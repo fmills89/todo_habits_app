@@ -7,7 +7,7 @@ function Habits({ habit, toggleComplete, deleteHabit }) {
     <li className={style.li}>
       <div className={style.row}>
         <input type="checkbox" />
-        <p className={style.text}>{habit}</p>
+        <p className={style.text}>{habit.text}</p>
       </div>
       <button>{<FaRegTrashAlt />}</button>
     </li>
