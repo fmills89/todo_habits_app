@@ -8,6 +8,7 @@ import {
   getDocs,
   onSnapshot,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 import HabitsList from "../Lists/HabitsList";
@@ -53,6 +54,12 @@ function HabitForm() {
     return () => unsubscribe();
   }, []);
 
+  const toggleComplete = async (habit) => {
+    await updateDoc(doc(db, "habits", habit.id), {
+      completed: !habit.completed,
+    });
+  };
+
   return (
     <div className={styleForm.habitContainer}>
       <div className={styleForm.container}>
@@ -69,9 +76,17 @@ function HabitForm() {
         </form>
         <ul>
           {habits.map((habit, index) => (
-            <HabitsList key={index} habit={habit} deleteHabit={deleteHabit} />
+            <HabitsList
+              key={index}
+              habit={habit}
+              deleteHabit={deleteHabit}
+              toggleComplete={toggleComplete}
+            />
           ))}
         </ul>
+        {habits.length > 1 ? null : (
+          <p className={styleForm.count}>You have {habits.length} habits.</p>
+        )}
       </div>
     </div>
   );
