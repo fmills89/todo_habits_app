@@ -31,6 +31,7 @@ function TodoForm() {
     }
   };
 
+  // deleteTodo
   const deleteTodo = async (id) => {
     if (id === undefined) {
       return alert("Id has not been found!");
