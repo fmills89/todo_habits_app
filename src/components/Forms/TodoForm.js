@@ -52,6 +52,7 @@ function TodoForm() {
     return () => unsubscribe();
   }, []);
 
+  // toggleComplete
   const toggleComplete = async (todo) => {
     await updateDoc(doc(db, "todos", todo.id), {
       completed: !todo.completed,
