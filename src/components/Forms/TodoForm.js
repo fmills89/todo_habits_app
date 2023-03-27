@@ -60,31 +60,33 @@ function TodoForm() {
   };
 
   return (
-    <div className={styleForm.container}>
-      <h3 className={styleForm.heading}>Action Items - Todos</h3>
-      <form onSubmit={createTodo} className={styleForm.form}>
-        <input
-          className={styleForm.input}
-          type="text"
-          placeholder="Add Priority Todos"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        ></input>
-        <Button />
-      </form>
-      <ul>
-        {todos.map((todo, index) => (
-          <TodoList
-            key={index}
-            todo={todo}
-            deleteTodo={deleteTodo}
-            toggleComplete={toggleComplete}
-          />
-        ))}
-      </ul>
-      {todos.length < 1 ? null : (
-        <p className={styleForm.count}>You have {todos.length} todos.</p>
-      )}
+    <div className={styleForm.paddingContainer}>
+      <div className={styleForm.container}>
+        <h3 className={styleForm.heading}>Action Items - Todos</h3>
+        <form onSubmit={createTodo} className={styleForm.form}>
+          <input
+            className={styleForm.input}
+            type="text"
+            placeholder="Add Priority Todos"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          ></input>
+          <Button />
+        </form>
+        <ul>
+          {todos.map((todo, index) => (
+            <TodoList
+              key={index}
+              todo={todo}
+              deleteTodo={deleteTodo}
+              toggleComplete={toggleComplete}
+            />
+          ))}
+        </ul>
+        {todos.length < 1 ? null : (
+          <p className={styleForm.count}>You have {todos.length} todos.</p>
+        )}
+      </div>
     </div>
   );
 }

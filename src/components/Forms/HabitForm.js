@@ -61,7 +61,7 @@ function HabitForm() {
   };
 
   return (
-    <div className={styleForm.habitContainer}>
+    <div className={styleForm.paddingContainer}>
       <div className={styleForm.container}>
         <h3 className={styleForm.heading}>Action Items - Habits</h3>
         <form onSubmit={createHabit} className={styleForm.form}>
